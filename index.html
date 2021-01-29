@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>repl.it</title>
+</head>
+
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js">
+
+	</script>
+	<script src="/socket.io/socket.io.js">
+
+	</script>
+	<script>
+		// setup
+function setup() {
+  createCanvas(1350, 630);
+}
+
+// normal variables
+var ehp = 500;
+var maxhp = 100;
+var emaxhp = 500;
+var yspeed = 0;
+var xspeed = 0;
+var player = 1;
+var id = 999;
+var socket = io();
+
+// arrays or smth close
+var [expos, eypos] = [200, 200];
+var xpos = [150, 150];
+var ypos = [100, 100];
+var hp = [100, 100];
+
+// main part
+function draw() {
+  background(225);
+
+  var i = 0;
+
+  xpos[id] += xspeed;
+  ypos[id] += yspeed;
+
+  if (xspeed != 0 || yspeed != 0) {
+    socket.emit('move', `${xpos[id]}|${ypos[id]}|${id}`);
+  }
+
+  var uid;
+  
+  socket.on('move', function(pos) {
+	var out = pos.split("|");
+    uid = out[2];
+    xpos[uid] = out[0];
+    ypos[uid] = out[1];
+  });
+  
+    socket.on('syncPlayer', function(players) {
+    player = players + 1;
+    for (i = player; i <= players; i++) {
+    xpos.push(100);
+    ypos.push(100);
+    hp.push(100);
+    }
+    if (id == 999) {
+      id = players;
+    }
+   });
+   
+   socket.on('leavePlayer', function(msg) {
+    //players = msg;
+   });
+
+  i = 0;
+  var size;
+
+  while (i < player) {
+    size = hp[i] / 10;
+
+    fill(0, 255, 0);
+    rect(xpos[i], ypos[i], size, size);
+
+    i++;
+  }
+
+  var esize = ehp / 10;
+  fill(255, 0, 0);
+  rect(expos, eypos, esize, esize);
+
+  var down = ypos[id] + (hp[id] / 10);
+  var up = ypos[id];
+  var left = xpos[id] + (hp[id] / 10);
+  var right = xpos[id];
+
+  var edown = eypos + esize;
+  var eup = eypos;
+  var eleft = expos + esize;
+  var eright = expos;
+
+  if (down < eup || up > edown) {
+  } else if (left < eright || right > eleft) {
+  } else if (hp[id] > 0) {
+    hp[id] -= 1;
+    ehp -= 1;
+  }
+
+  if (hp[id] < maxhp) {
+    hp[id] += 0.5;
+  } else {
+    hp[id] = maxhp;
+  }
+
+  if (ehp < emaxhp) {
+    ehp += 0.1;
+  } else {
+    ehp = emaxhp;
+  }
+}
+
+// when a key is pressed
+function keyPressed() {
+  switch (keyCode) {
+    case 37:
+    case 65:
+      xspeed += -2;
+      break;
+    case 39:
+    case 68:
+      xspeed += 2;
+      break;
+    case 38:
+    case 87:
+      yspeed += -2;
+      break;
+    case 40:
+    case 83:
+      yspeed += 2;
+      break;
+  }
+}
+
+// when a key is released
+function keyReleased() {
+  switch (keyCode) {
+    case 37:
+    case 65:
+      xspeed = 0;
+      break;
+    case 39:
+    case 68:
+      xspeed = 0;
+      break;
+    case 38:
+    case 87:
+      yspeed = 0;
+      break;
+    case 40:
+    case 83:
+      yspeed = 0;
+      break;
+  }
+}
+	</script>
+</body>
+
+</html>
