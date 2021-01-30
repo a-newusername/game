@@ -16,6 +16,6 @@ useless
 
 ## Why you should play and contribute to this game
 
-you dont and if you want to go ahead
+you dont need to, but if you want just go ahead
 
 ###### why the hell would you contribute
