@@ -4,7 +4,7 @@ i currently dont have any name for this game yet bc its so new
 
 ## Features
 
-fricking ram into enemies and move (nothing else yet)
+fricking ram into enemies and move in multiplayer (nothing else yet)
 
 ## Downloads
 
