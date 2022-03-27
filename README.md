@@ -21,3 +21,13 @@ you dont need to
 ### but if you want just go ahead
 
 ###### but why the hell would you contribute
+
+
+
+
+# ANNOUNCEMENT
+i abandoned this thing wow!!!!! what a surprize!!!!!!!!!!!!!
+
+but fr this is my first "game"
+
+i am noob and proud
