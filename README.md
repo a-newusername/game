@@ -8,8 +8,9 @@ just ram into enemies and move in multiplayer (nothing else yet)
 
 ## Downloads
 
-its html5 why do you need to download
-also i dont have a permanent link
+its html5 you dont need to download
+
+https://gamestuffj.herokuapp.com/ (only works if i bother to fix it)
 
 ## Why this is created?
 
