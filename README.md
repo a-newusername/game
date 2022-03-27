@@ -1,6 +1,6 @@
-# GAME
+# Game
 
-i currently dont have any name for this game yet bc its so new
+i am unoriginal
 
 ## Features
 
