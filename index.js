@@ -16,14 +16,13 @@ io.on('connection', (socket) => {
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 		players -= 1;
-		socket.emit("leavePlayer", players);
+		socket.broadcast.emit("leavePlayer", players);
 	});
 
 	socket.on('console', (output) => {
 		console.log(output);
 	});
 
-	socket.emit("syncPlayer", players);
 	socket.broadcast.emit("syncPlayer", players);
 	console.log("user connected")
 	players += 1;
